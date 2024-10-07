@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Splash Screen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1e272e;
+        }
+        .splash-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+        .loading-circle {
+            width: 100px;
+            height: 100px;
+            border: 10px solid rgba(255, 255, 255, 0.2);
+            border-top: 10px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .percentage {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="splash-screen">
+        <div class="loading-circle"></div><br>
+        <div class="loading-text">Loading the application, please wait...</div></br>
+        <div class="percentage" id="loading-percentage">1%</div>
+    </div>
+
+    <script>
+        let percentage = 1;
+        const loadingText = document.getElementById('loading-percentage');
+
+        // Total duration for loading (e.g., 5 seconds for full loading from 1% to 100%)
+        const totalDuration = 10000;
+        const intervalTime = totalDuration / 100;
+
+        // Function to increment the loading percentage
+        const updateLoading = setInterval(function() {
+            if (percentage <= 100) {
+                loadingText.innerText = percentage + '%'; // Update text to show current percentage
+                loadingText.style.opacity = 1; // Smooth opacity transition
+                percentage++;
+            } else {
+                clearInterval(updateLoading);
+                window.location.href = 'Login.html'; // Redirect when 100% is reached
+            }
+        }, intervalTime); // Increment according to the calculated interval
+    </script>
+</body>
+</html>
